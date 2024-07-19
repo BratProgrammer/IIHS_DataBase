@@ -1,19 +1,13 @@
 package ru.bratprogrammer.IIHS.Service;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.bratprogrammer.IIHS.DAO.CarDAO;
 import ru.bratprogrammer.IIHS.DAO.CrashTestResultDAO;
-import ru.bratprogrammer.IIHS.DAO.DAO;
 import ru.bratprogrammer.IIHS.Entities.Car;
 import ru.bratprogrammer.IIHS.Entities.CrashTestResult;
-
 import java.util.Optional;
-import java.util.function.Consumer;
 
 @Service
 public class IIHS_Service implements I_IIHS_Service {
@@ -24,10 +18,11 @@ public class IIHS_Service implements I_IIHS_Service {
     @Autowired
     private CrashTestResultDAO crashTestResultDAO;
 
+    @Override
     @Transactional
     public Car getBestCarByAverageOfTestsResults(int[] idArray) {
         Car resultCar;
-        int carId = 0;
+        int carId = -1;
         double maxAverage = 0;
         Optional<Double> currentAverage;
 
@@ -40,7 +35,11 @@ public class IIHS_Service implements I_IIHS_Service {
                 }
             }
         }
-        
+
+        if (carId == -1) {
+            return null;
+        }
+
         resultCar = carDAO.getById(carId);
         return resultCar;
     }
@@ -104,5 +103,4 @@ public class IIHS_Service implements I_IIHS_Service {
     public void deleteCrashTestResult(CrashTestResult crashTestResult) {
         crashTestResultDAO.delete(crashTestResult);
     }
-
 }

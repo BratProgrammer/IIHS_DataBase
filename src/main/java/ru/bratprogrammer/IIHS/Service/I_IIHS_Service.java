@@ -15,6 +15,6 @@ public interface I_IIHS_Service {
     public CrashTestResult findCrashTestResultById(int id);
     public void deleteCrashTestResultById(int id);
     public void deleteCrashTestResult(CrashTestResult crashTestResult);
-
+    public Car getBestCarByAverageOfTestsResults(int[] idArray);
 
 }

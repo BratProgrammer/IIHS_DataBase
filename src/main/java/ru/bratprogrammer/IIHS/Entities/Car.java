@@ -15,6 +15,8 @@ public class Car {
     @Id
     @Column(name = "car_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @OneToOne
+    @JoinColumn(name = "car_id")
     private int carId;
 
     @Column

@@ -18,16 +18,16 @@ public class CrashTestResultDAO implements DAO<CrashTestResult> {
     public Optional<Double> getAverageTestResultByCarId(int id) {
         String jpql = """
                 SELECT AVG(
-                a.small_overlap_front,
-                a.moderate_overlap_front,
+                a.smallOverlapFront,
+                a.moderateOverlapFront,
                 a.side,
                 a.headlights,
-                a.seat_belt_reminders,
-                a.front_crash,
-                a.LATCH_ease_of_use
+                a.seatBeltReminders,
+                a.frontCrash,
+                a.LatchEaseOfUse
                 )
                 FROM CrashTestResult a
-                WHERE a.car_id = :id
+                WHERE a.carId = :id
                 """;
         Optional<Double> average = entityManager.createQuery(jpql, Double.class)
                 .setParameter("id", id)
