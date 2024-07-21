@@ -43,8 +43,17 @@ public class CrashTestResultDAO implements DAO<CrashTestResult> {
 
     @Override
     @Transactional
-    public void update(CrashTestResult crashTestResult) {
-        if (crashTestResult != null) {
+    public void update(int id, CrashTestResult crashTestResult) {
+        CrashTestResult forUpdate = entityManager.find(CrashTestResult.class, id);
+
+        if (crashTestResult != null && forUpdate != null) {
+            forUpdate.setFrontCrash(crashTestResult.getFrontCrash());
+            forUpdate.setSide(crashTestResult.getSide());
+            forUpdate.setSmallOverlapFront(crashTestResult.getSmallOverlapFront());
+            forUpdate.setModerateOverlapFront(crashTestResult.getModerateOverlapFront());
+            forUpdate.setHeadlights(crashTestResult.getHeadlights());
+            forUpdate.setSeatBeltReminders(crashTestResult.getSeatBeltReminders());
+            forUpdate.setLatchEaseOfUse(crashTestResult.getLatchEaseOfUse());
             entityManager.merge(crashTestResult);
         }
     }

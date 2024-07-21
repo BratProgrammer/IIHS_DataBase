@@ -22,9 +22,14 @@ public class CarDAO implements DAO<Car> {
 
     @Override
     @Transactional
-    public void update(Car car) {
-        if (car != null) {
-            entityManager.merge(car);
+    public void update(int id, Car car) {
+        Car carForUpdate = entityManager.find(Car.class, id);
+        if (car != null && carForUpdate != null) {
+            carForUpdate.setModel(car.getModel());
+            carForUpdate.setCarType(car.getCarType());
+            carForUpdate.setBrand(car.getBrand());
+            carForUpdate.setYearOfCreate(car.getYearOfCreate());
+            entityManager.merge(carForUpdate);
         }
     }
 
@@ -39,7 +44,7 @@ public class CarDAO implements DAO<Car> {
     @Override
     @Transactional
     public List<Car> getAll() {
-        List<Car> list = entityManager.createQuery("SELECT * FROM cars", Car.class).getResultList();
+        List<Car> list = entityManager.createQuery("SELECT car FROM Car car", Car.class).getResultList();
         list.forEach(entityManager::detach);
         return list;
     }
@@ -47,13 +52,14 @@ public class CarDAO implements DAO<Car> {
     @Override
     @Transactional
     public void delete(Car car) {
-        entityManager.remove(car);
+        if (car != null) {
+            entityManager.remove(car);
+        }
     }
 
     @Override
     @Transactional
     public void deleteById(int id) {
-
         Car carForDelete = entityManager.find(Car.class, id);
         if (carForDelete != null) {
             entityManager.remove(entityManager.find(Car.class, id));

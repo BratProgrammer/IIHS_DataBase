@@ -7,6 +7,8 @@ import ru.bratprogrammer.IIHS.DAO.CarDAO;
 import ru.bratprogrammer.IIHS.DAO.CrashTestResultDAO;
 import ru.bratprogrammer.IIHS.Entities.Car;
 import ru.bratprogrammer.IIHS.Entities.CrashTestResult;
+
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -19,7 +21,6 @@ public class IIHS_Service implements I_IIHS_Service {
     private CrashTestResultDAO crashTestResultDAO;
 
     @Override
-    @Transactional
     public Car getBestCarByAverageOfTestsResults(int[] idArray) {
         Car resultCar;
         int carId = -1;
@@ -44,62 +45,56 @@ public class IIHS_Service implements I_IIHS_Service {
         return resultCar;
     }
 
+    public List<Car> getAllCars() {
+        return carDAO.getAll();
+    }
+
     @Override
-    @Transactional
     public void createCar(Car car) {
         carDAO.create(car);
     }
 
     @Override
-    @Transactional
-    public void updateCar(Car car) {
-        carDAO.update(car);
+    public void updateCar(int id, Car car) {
+        carDAO.update(id, car);
     }
 
     @Override
-    @Transactional
     public Car findCarById(int id) {
         return carDAO.getById(id);
     }
 
     @Override
-    @Transactional
     public void deleteCarById(int id) {
         carDAO.deleteById(id);
     }
 
     @Override
-    @Transactional
     public void deleteCar(Car car) {
         carDAO.delete(car);
     }
 
     @Override
-    @Transactional
     public void createCrashTestResult(CrashTestResult crashTestResult) {
         crashTestResultDAO.create(crashTestResult);
     }
 
     @Override
-    @Transactional
-    public void updateCrashTestResult(CrashTestResult crashTestResult) {
-        crashTestResultDAO.update(crashTestResult);
+    public void updateCrashTestResult(int id, CrashTestResult crashTestResult) {
+        crashTestResultDAO.update(id, crashTestResult);
     }
 
     @Override
-    @Transactional
     public CrashTestResult findCrashTestResultById(int id) {
         return crashTestResultDAO.getById(id);
     }
 
     @Override
-    @Transactional
     public void deleteCrashTestResultById(int id) {
         crashTestResultDAO.deleteById(id);
     }
 
     @Override
-    @Transactional
     public void deleteCrashTestResult(CrashTestResult crashTestResult) {
         crashTestResultDAO.delete(crashTestResult);
     }

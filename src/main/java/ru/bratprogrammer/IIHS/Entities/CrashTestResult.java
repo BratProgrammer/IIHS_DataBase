@@ -12,11 +12,12 @@ public class CrashTestResult {
 
     @Id
     @Column(name = "crash_test_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int crashTestId;
 
-    @Column(name = "car_id")
-    private int carId;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "car_id")
+    private Car car;
 
     @Column(name = "small_overlap_front")
     private int smallOverlapFront;

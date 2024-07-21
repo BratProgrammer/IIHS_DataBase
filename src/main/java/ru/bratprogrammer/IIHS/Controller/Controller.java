@@ -8,6 +8,8 @@ import ru.bratprogrammer.IIHS.Entities.Car;
 import ru.bratprogrammer.IIHS.Entities.CrashTestResult;
 import ru.bratprogrammer.IIHS.Service.I_IIHS_Service;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/v1/iihs")
 @Validated
@@ -46,9 +48,9 @@ public class Controller {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/update_car")
-    public ResponseEntity deleteCar(@RequestBody Car car) {
-        service.updateCar(car);
+    @PutMapping("/update_car/{id}")
+    public ResponseEntity deleteCar(@PathVariable("id") int id, @RequestBody Car car) {
+        service.updateCar(id, car);
         return ResponseEntity.ok().build();
     }
 
@@ -63,9 +65,14 @@ public class Controller {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/update_crash_test_result")
-    public ResponseEntity deleteCrashTestResult(@RequestBody CrashTestResult crashTestResult) {
-        service.updateCrashTestResult(crashTestResult);
+    @PutMapping("/update_crash_test_result/{id}")
+    public ResponseEntity updateCrashTestResult(@PathVariable("id") int id, @RequestBody CrashTestResult crashTestResult) {
+        service.updateCrashTestResult(id, crashTestResult);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/get_all_cars")
+    public ResponseEntity<List<Car>> getAllCar() {
+        return ResponseEntity.ok(service.getAllCars());
     }
 }

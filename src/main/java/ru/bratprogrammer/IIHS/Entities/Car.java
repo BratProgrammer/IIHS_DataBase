@@ -1,9 +1,7 @@
 package ru.bratprogrammer.IIHS.Entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
@@ -14,9 +12,7 @@ public class Car {
 
     @Id
     @Column(name = "car_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @OneToOne
-    @JoinColumn(name = "car_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int carId;
 
     @Column
