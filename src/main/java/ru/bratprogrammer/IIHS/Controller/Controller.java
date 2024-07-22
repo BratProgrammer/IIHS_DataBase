@@ -7,11 +7,9 @@ import org.springframework.web.bind.annotation.*;
 import ru.bratprogrammer.IIHS.DTO.CarDTO;
 import ru.bratprogrammer.IIHS.DTO.CrashTestResultDTO;
 import ru.bratprogrammer.IIHS.Entities.Car;
-import ru.bratprogrammer.IIHS.Entities.CrashTestResult;
 import ru.bratprogrammer.IIHS.Service.I_IIHS_Service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -30,14 +28,14 @@ public class Controller {
 
 
     @PostMapping("/create_car")
-    public ResponseEntity createCar(@RequestBody Car car) {
-        service.createCar(car);
+    public ResponseEntity createCar(@RequestBody CarDTO car) {
+        service.createCar(car.toEntity());
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/create_crash_test_result")
-    public ResponseEntity createCrashTestResult(@RequestBody CrashTestResult crashTestResult) {
-        service.createCrashTestResult(crashTestResult);
+    public ResponseEntity createCrashTestResult(@RequestBody CrashTestResultDTO crashTestResult) {
+        service.createCrashTestResult(crashTestResult.toEntity());
         return ResponseEntity.ok().build();
     }
 
@@ -53,8 +51,8 @@ public class Controller {
     }
 
     @PutMapping("/update_car/{id}")
-    public ResponseEntity deleteCar(@PathVariable("id") int id, @RequestBody Car car) {
-        service.updateCar(id, car);
+    public ResponseEntity deleteCar(@PathVariable("id") int id, @RequestBody CarDTO car) {
+        service.updateCar(id, car.toEntity());
         return ResponseEntity.ok().build();
     }
 
@@ -70,8 +68,8 @@ public class Controller {
     }
 
     @PutMapping("/update_crash_test_result/{id}")
-    public ResponseEntity updateCrashTestResult(@PathVariable("id") int id, @RequestBody CrashTestResult crashTestResult) {
-        service.updateCrashTestResult(id, crashTestResult);
+    public ResponseEntity updateCrashTestResult(@PathVariable("id") int id, @RequestBody CrashTestResultDTO crashTestResult) {
+        service.updateCrashTestResult(id, crashTestResult.toEntity());
         return ResponseEntity.ok().build();
     }
 
