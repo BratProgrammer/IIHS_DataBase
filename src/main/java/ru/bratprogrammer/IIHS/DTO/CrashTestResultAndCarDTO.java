@@ -6,4 +6,5 @@ import lombok.Data;
 public class CrashTestResultAndCarDTO {
     private CarDTO car;
     private CrashTestResultDTO crashTestResult;
+
 }

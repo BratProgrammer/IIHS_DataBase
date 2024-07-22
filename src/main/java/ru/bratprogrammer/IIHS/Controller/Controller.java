@@ -4,10 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import ru.bratprogrammer.IIHS.DTO.CarDTO;
+import ru.bratprogrammer.IIHS.DTO.CrashTestResultDTO;
 import ru.bratprogrammer.IIHS.Entities.Car;
 import ru.bratprogrammer.IIHS.Entities.CrashTestResult;
 import ru.bratprogrammer.IIHS.Service.I_IIHS_Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -20,8 +24,8 @@ public class Controller {
 
 
     @GetMapping("get_best_car")
-    public ResponseEntity<Car> getBestCar(@RequestBody int[] idArray) {
-        return ResponseEntity.ok(service.getBestCarByAverageOfTestsResults(idArray));
+    public ResponseEntity<CarDTO> getBestCar(@RequestBody int[] idArray) {
+        return ResponseEntity.ok(new CarDTO().from(service.getBestCarByAverageOfTestsResults(idArray)));
     }
 
 
@@ -38,8 +42,8 @@ public class Controller {
     }
 
     @GetMapping("/get_car_by_id/{id}")
-    public ResponseEntity<Car> getCarById(@PathVariable("id") int id) {
-        return ResponseEntity.ok(service.findCarById(id));
+    public ResponseEntity<CarDTO> getCarById(@PathVariable("id") int id) {
+        return ResponseEntity.ok(new CarDTO().from(service.findCarById(id)));
     }
 
     @DeleteMapping("/delete_car_by_id/{id}")
@@ -55,8 +59,8 @@ public class Controller {
     }
 
     @GetMapping("/get_crash_test_result_by_id/{id}")
-    public ResponseEntity<CrashTestResult> getCrashTestResultById(@PathVariable("id") int id) {
-        return ResponseEntity.ok(service.findCrashTestResultById(id));
+    public ResponseEntity<CrashTestResultDTO> getCrashTestResultById(@PathVariable("id") int id) {
+        return ResponseEntity.ok(new CrashTestResultDTO().from(service.findCrashTestResultById(id)));
     }
 
     @DeleteMapping("/delete_crash_test_result_by_id/{id}")
@@ -72,7 +76,14 @@ public class Controller {
     }
 
     @GetMapping("/get_all_cars")
-    public ResponseEntity<List<Car>> getAllCar() {
-        return ResponseEntity.ok(service.getAllCars());
+    public ResponseEntity<List<CarDTO>> getAllCar() {
+        List<Car> list = service.getAllCars();
+        List<CarDTO> listDTO = new ArrayList<>();
+
+        for (Car car : list) {
+            listDTO.add(new CarDTO().from(car));
+        }
+
+        return ResponseEntity.ok(listDTO);
     }
 }
