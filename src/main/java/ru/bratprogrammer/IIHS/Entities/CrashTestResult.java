@@ -15,7 +15,7 @@ public class CrashTestResult {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int crashTestId;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "car_id")
     private Car car;
 

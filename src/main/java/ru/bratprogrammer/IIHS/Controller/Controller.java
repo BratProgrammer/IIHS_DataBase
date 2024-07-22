@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.bratprogrammer.IIHS.DTO.CarDTO;
 import ru.bratprogrammer.IIHS.DTO.CrashTestResultDTO;
 import ru.bratprogrammer.IIHS.Entities.Car;
-import ru.bratprogrammer.IIHS.Service.I_IIHS_Service;
+import ru.bratprogrammer.IIHS.Service.IIHS_Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ import java.util.List;
 public class Controller {
 
     @Autowired
-    I_IIHS_Service service;
+    IIHS_Service service;
 
 
     @GetMapping("get_best_car")

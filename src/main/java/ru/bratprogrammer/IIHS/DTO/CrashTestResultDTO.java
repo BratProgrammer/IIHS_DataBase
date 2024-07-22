@@ -4,14 +4,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.bratprogrammer.IIHS.Entities.CrashTestResult;
-import ru.bratprogrammer.IIHS.Service.I_IIHS_Service;
+import ru.bratprogrammer.IIHS.Service.IIHS_Service;
 
 @Data
 public class CrashTestResultDTO {
 
     @Autowired
     @JsonIgnore
-    I_IIHS_Service service;
+    IIHS_Service service;
 
     private int crashTestId;
 
