@@ -33,6 +33,7 @@ public class CrashTestResultDTO {
 
     public CrashTestResultDTO from(CrashTestResult crashTestResult) {
         CrashTestResultDTO crashTestResultDTO = new CrashTestResultDTO();
+
         crashTestResultDTO.setCrashTestId(crashTestResult.getCrashTestId());
         crashTestResultDTO.setCarId(crashTestResult.getCar().getCarId());
         crashTestResultDTO.setSmallOverlapFront(crashTestResult.getSmallOverlapFront());
@@ -48,6 +49,7 @@ public class CrashTestResultDTO {
 
     public CrashTestResult toEntity() {
         CrashTestResult crashTestResult = new CrashTestResult();
+
         crashTestResult.setCrashTestId(this.getCrashTestId());
         crashTestResult.setCar(service.findCarById(this.getCarId()));
         crashTestResult.setSmallOverlapFront(this.getSmallOverlapFront());

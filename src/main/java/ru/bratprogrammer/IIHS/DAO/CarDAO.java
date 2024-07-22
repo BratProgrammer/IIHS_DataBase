@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import ru.bratprogrammer.IIHS.DTO.CarDTO;
 import ru.bratprogrammer.IIHS.Entities.Car;
 
 import java.util.List;
@@ -64,6 +65,22 @@ public class CarDAO implements DAO<Car> {
         if (carForDelete != null) {
             entityManager.remove(entityManager.find(Car.class, id));
         }
+    }
+
+    public Integer getCarId(Car car) {
+        Integer id;
+        String jpql = """
+                SELECT car.id FROM Car car
+                WHERE car.model = :model
+                AND car.brand = :brand
+                AND car.yearOfCreate = :yearOfCreate
+                """;
+        id = entityManager.createQuery(jpql, Integer.class)
+                .setParameter("model", car.getModel())
+                .setParameter("brand", car.getBrand())
+                .setParameter("yearOfCreate", car.getYearOfCreate())
+                .getFirstResult();
+        return id;
     }
 
     /*

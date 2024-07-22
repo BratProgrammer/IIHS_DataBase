@@ -1,5 +1,6 @@
 package ru.bratprogrammer.IIHS.Service;
 
+import ru.bratprogrammer.IIHS.DTO.CarDTO;
 import ru.bratprogrammer.IIHS.Entities.Car;
 import ru.bratprogrammer.IIHS.Entities.CrashTestResult;
 
@@ -7,16 +8,18 @@ import java.util.List;
 
 public interface I_IIHS_Service {
 
-    public void createCar(Car car);
-    public void updateCar(int id, Car car);
-    public Car findCarById(int id);
-    public void deleteCarById(int id);
-    public void deleteCar(Car car);
-    public void createCrashTestResult(CrashTestResult crashTestResult);
-    public void updateCrashTestResult(int id, CrashTestResult crashTestResult);
-    public CrashTestResult findCrashTestResultById(int id);
-    public void deleteCrashTestResultById(int id);
-    public void deleteCrashTestResult(CrashTestResult crashTestResult);
-    public Car getBestCarByAverageOfTestsResults(int[] idArray);
-    public List<Car> getAllCars();
+    void createCar(Car car);
+    void updateCar(int id, Car car);
+    Car findCarById(int id);
+    void deleteCarById(int id);
+    void deleteCar(Car car);
+    void createCrashTestResult(CrashTestResult crashTestResult);
+    void updateCrashTestResult(int id, CrashTestResult crashTestResult);
+    CrashTestResult findCrashTestResultById(int id);
+    void deleteCrashTestResultById(int id);
+    void deleteCrashTestResult(CrashTestResult crashTestResult);
+    Car getBestCarByAverageOfTestsResults(int[] idArray);
+    List<Car> getAllCars();
+
+    Integer getCarId(Car car);
 }

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.bratprogrammer.IIHS.DAO.CarDAO;
 import ru.bratprogrammer.IIHS.DAO.CrashTestResultDAO;
+import ru.bratprogrammer.IIHS.DTO.CarDTO;
 import ru.bratprogrammer.IIHS.Entities.Car;
 import ru.bratprogrammer.IIHS.Entities.CrashTestResult;
 
@@ -47,6 +48,11 @@ public class IIHS_Service implements I_IIHS_Service {
 
     public List<Car> getAllCars() {
         return carDAO.getAll();
+    }
+
+    @Override
+    public Integer getCarId(Car car) {
+        return carDAO.getCarId(car);
     }
 
     @Override

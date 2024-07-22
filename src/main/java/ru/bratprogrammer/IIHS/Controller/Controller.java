@@ -84,4 +84,9 @@ public class Controller {
 
         return ResponseEntity.ok(listDTO);
     }
+
+    @GetMapping("/get_car_id")
+    public ResponseEntity<Integer> getCarId(@RequestBody CarDTO carDTO) {
+        return ResponseEntity.ok(service.getCarId(carDTO.toEntity()));
+    }
 }
